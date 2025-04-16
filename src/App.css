@@ -12,7 +12,7 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #f9fafb;
+  background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
 }
 
 .container{

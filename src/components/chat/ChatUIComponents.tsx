@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Mic, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import "../../App.css"
 
 type Message = {
   type: "bot" | "user";
@@ -77,14 +78,14 @@ export default function ChatUIComponents() {
 
   const handleVoiceClick = () => {
     setRecording(!recording);
-    // optional: voice yozish funktsiyasi
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-white">
+    <div className="container">
+        <div className="flex flex-col h-screen bg-gradient-to-br from-blue-50 to-white rounded-3xl">
       <div className="flex-1 overflow-y-auto p-4 pb-32 space-y-4">
         {loading ? (
-          <div className="text-center text-blue-600 mt-10 animate-pulse">Yuklanmoqda...</div>
+          <div className="text-center text-blue-600 mt-10 animate-pulse">Ma'lumotlar tahlil qilinmoqda...</div>
         ) : (
           messages.map((msg, index) => (
             <motion.div
@@ -98,7 +99,7 @@ export default function ChatUIComponents() {
             >
               {msg.type === "bot" && (
                 <div className="w-8 h-8 rounded-full bg-blue-200 text-blue-800 flex items-center justify-center text-xs font-bold mr-2 shadow">
-                  🤖
+                  👨‍⚕️
                 </div>
               )}
               <div
@@ -120,7 +121,7 @@ export default function ChatUIComponents() {
       </div>
 
       {/* Fixed input panel pastda */}
-      <div className="p-4 border-t bg-white flex items-center gap-2 fixed bottom-0 left-0 right-0 shadow-md">
+      <div className="w-full max-w-[600px] py-2 px-5 bg-white flex items-center gap-2 fixed bottom-4 left-1/2 transform -translate-x-1/2 shadow-lg rounded-[24px] border border-blue-200">
         <button
           onClick={handleVoiceClick}
           className={`p-2 rounded-full border border-blue-300 ${
@@ -147,5 +148,7 @@ export default function ChatUIComponents() {
         </button>
       </div>
     </div>
+    </div>
+    
   );
 }

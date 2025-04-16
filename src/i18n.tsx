@@ -9,13 +9,13 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en', // Agar foydalanuvchining tili topilmasa, default til
+    fallbackLng: 'en', 
     debug: true,
     interpolation: {
-      escapeValue: false, // React buni avtomatik tarzda qochiradi
+      escapeValue: false, 
     },
     react: {
-      useSuspense: false, // Suspense bilan ishlashni o'chirish
+      useSuspense: false, 
     },
   });
 

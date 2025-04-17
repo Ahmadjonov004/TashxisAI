@@ -26,10 +26,8 @@ const Form: React.FC = () => {
 
     console.log("Yuborilgan ma'lumotlar:", formData);
 
-    // Ma'lumotlarni localStorage ga saqlash
     localStorage.setItem("formData", JSON.stringify(formData));
 
-    // Chat sahifasiga o'tish
     navigate("/chatUI");
   };
 

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import logo from "../../assets/images/logo2.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState("uz");
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Auth holatini tekshirish
 
   return (
     <nav className="bg-white shadow-sm sticky top-0 z-50">
@@ -11,33 +13,33 @@ export default function Navbar() {
         <div className="flex justify-between h-16 items-center">
           {/* Logo section */}
           <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
+            <Link to="/" className="flex-shrink-0 flex items-center">
               <img 
                 className="h-8 w-auto rounded-lg" 
                 src={logo} 
                 alt="Tashxis AI logo"
               />
               <span className="ml-2 text-xl font-bold text-blue-600">Tashxis AI</span>
-            </div>
+            </Link>
           </div>
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center space-x-6">
-            <a 
-              href="#" 
+            <Link 
+              to="/guide" 
               className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Qo'llanma
-            </a>
-            <a 
-              href="#" 
+            </Link>
+            <Link 
+              to="/privacy" 
               className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
             >
               Maxfiylik
-            </a>
+            </Link>
             
             {/* Language selector */}
-            <div className="relative">
+            <div className="relative mr-4">
               <select
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
@@ -53,6 +55,39 @@ export default function Navbar() {
                 </svg>
               </div>
             </div>
+
+            {/* Auth buttons */}
+            {isLoggedIn ? (
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/profile"
+                  className="text-gray-700 hover:text-blue-600 text-sm font-medium"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={() => setIsLoggedIn(false)}
+                  className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors duration-200"
+                >
+                  Chiqish
+                </button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-3">
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-blue-600 border border-blue-600 rounded-md text-sm font-medium hover:bg-blue-50 transition-colors duration-200"
+                >
+                  Kirish
+                </Link>
+                <Link
+                  to="/register"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm"
+                >
+                  Ro'yxatdan o'tish
+                </Link>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -85,20 +120,20 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-          <a
-            href="#"
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden bg-white shadow-lg`}>
+        <div className="px-2 pt-2 pb-4 space-y-2 sm:px-3">
+          <Link
+            to="/guide"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
           >
             Qo'llanma
-          </a>
-          <a
-            href="#"
+          </Link>
+          <Link
+            to="/privacy"
             className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
           >
             Maxfiylik
-          </a>
+          </Link>
           <div className="px-3 py-2">
             <select
               value={language}
@@ -109,6 +144,39 @@ export default function Navbar() {
               <option value="ru">Русский</option>
               <option value="en">English</option>
             </select>
+          </div>
+          <div className="pt-2 border-t border-gray-200">
+            {isLoggedIn ? (
+              <div className="space-y-2">
+                <Link
+                  to="/profile"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                >
+                  Profile
+                </Link>
+                <button
+                  onClick={() => setIsLoggedIn(false)}
+                  className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                >
+                  Chiqish
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <Link
+                  to="/login"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-blue-600 hover:bg-blue-50"
+                >
+                  Kirish
+                </Link>
+                <Link
+                  to="/register"
+                  className="block px-3 py-2 bg-blue-600 text-white rounded-md text-base font-medium text-center hover:bg-blue-700"
+                >
+                  Ro'yxatdan o'tish
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
